@@ -1,36 +1,49 @@
 library(shiny)
 library(shinyMobile)
-shiny::shinyApp(
+
+shinyApp(
   ui = f7Page(
-    title = "Risk Manager",
-    f7SplitLayout(
-      navbar = f7Navbar(title = "Split Layout", hairline = FALSE, shadow = TRUE),
-      sidebar = f7Panel(
-        inputId="sidebar",
-        title = "Others",
-        side = "left",
-        theme = "light",
-        
-        f7PanelMenu(
-          id = "menu",
-          f7PanelItem(tabName = "BIS", title = "BIS", icon=f7Icon("email"), active = TRUE),
-          
-        ),
-        effect = "reveal"
+    title = "Sub Navbar",
+    f7TabLayout(
+      panels = tagList(
+        f7Panel(title = "Left Panel", side = "left", theme = "light", "Blabla", style = "cover")
       ),
-      f7Items(
-        f7Item(
-          tabName = "tab1"
+      navbar = f7Navbar(
+        title = "RISK MANAGING",
+        hairline = FALSE,
+        shadow = TRUE,
+        leftPanel = TRUE,
+        rightPanel = TRUE,
+        subNavbar = f7SubNavbar(
+          f7Button(label = "BIS"),
+          f7Button(label = "자기자본비율"),
+          f7Button(label = "ROE")
+        )
+      ),
+      f7Tabs(
+        animated = TRUE,
+        #swipeable = TRUE,
+        f7Tab(
+          tabName = "Tab1",
+          icon = f7Icon("money_dollar_circle"),
+          active = TRUE,
+          "Tab 1"
         ),
-        f7Item(
-          tabName = "tab2"
+        f7Tab(
+          tabName = "Tab2",
+          icon = f7Icon("tortoise"),
+          active = FALSE,
+          "Tab 2"
+        ),
+        f7Tab(
+          tabName = "Tab3",
+          icon = f7Icon("xmark_octagon"),
+          active = FALSE,
+          "Tab 3"
         )
       )
-    ),
-    toolbar = f7Toolbar(
-      position = "bottom",
-      f7Link(label = "Source", src = "https://finlife.fss.or.kr/deposit/selectDeposit.do?menuId=2000100")
-    ),
+    )
   ),
   server = function(input, output) {}
 )
+
