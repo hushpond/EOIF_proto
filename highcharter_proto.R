@@ -2,7 +2,7 @@ library(shiny)
 library(highcharter)
 
 ui <- fluidPage(
-  titlePanel("Korean Saving Banks Interest Rate Movement"),
+  titlePanel("EOIF_proto"),
   sidebarLayout(
     sidebarPanel(
       selectInput("bank", "Select a Bank:",
@@ -17,8 +17,8 @@ ui <- fluidPage(
 server <- function(input, output) {
   output$interest_rate_chart <- renderHighchart({
     bank_data <- data.frame(
-      date = seq.Date(from = as.Date("2021-01-01"),
-                      to = as.Date("2021-12-31"),
+      date = seq.Date(from = as.Date("2022-01-01"),
+                      to = as.Date("2022-12-31"),
                       by = "month"),
       rate = cumsum(rnorm(12))
     )
